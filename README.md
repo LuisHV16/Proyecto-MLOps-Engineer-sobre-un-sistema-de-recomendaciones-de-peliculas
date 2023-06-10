@@ -5,17 +5,17 @@
 <details>
   <summary>Tabla de contenidos</summary>
   <ol>
-    <li><a href="#Index">Indice</a></li>
-    <li><a href="#Introduction">Introducción</a></li>
-    <li><a href="#Objective">Objectivo</a></li>
+    <li><a href="#Índice">Indice</a></li>
+    <li><a href="#Introducción">Introducción</a></li>
+    <li><a href="#Objetivos">Objectivo</a></li>
     <li><a href="#Tech Stack">Tecnologías utilizadas</a></li>
     <li><a href="#ETL">ETL</a></li>
     <li><a href="#EDA">EDA</a></li>
-    <li><a href="#API Functions">API Funciones</a></li>
-    <li><a href="#Recommendation System">Sistema de recomendaciones</a></li>
+    <li><a href="#API Funtiones">API Funciones</a></li>
+    <li><a href="#Sistema de recomendaciones">Sistema de recomendaciones</a></li>
     <li><a href="#Deployment">Deployment</a></li>
     <li><a href="#Video">Video resumen del proyecto</a></li>
-    <li><a href="#Developer">Desarrollador del proyecto</a></li>
+    <li><a href="#Desarrollador">Desarrollador del proyecto</a></li>
   </ol>
 </details>
 
@@ -67,58 +67,32 @@ Para el desarrollo de nuestro Analisis exploratorio de datos comenzamos por anal
 
 Todo esto fue desarrollado localmente en VSCODE utilizando Jupyter Notebook, python, numpy, pandas, matplotlib, seaborn y wordcolud.
 
-## API Functions
-Para esta parte del proyecto implementamos un entorno virtual al cual agregamos las librerias necesarias para llevar a cabo nuestro proyecto y desarrollamos funciones que serian consumidas de forma virtual por el servidor del servicio de FastAPI al cual adjuntaremos el enlace para poder visualizar dichas funciones dando clic al archivo [main.py](https://github.com/LuisHV16?tab=repositories) este archivo contiene los modelos de consulta al cual son consumidos para poderlos visualizar en el servidos ASGI de FastAPI, este era un punto importante solicitados por la direccion del proyecto, ademas es posible visualizar y ejecutar de forma local las funciones creadas para el modelo de consulta dando clic al archivo [funciones.py](https://github.com/LuisHV16?tab=repositories). 
+## API Funciones
+Para esta parte del proyecto implementamos un entorno virtual al cual agregamos las librerias necesarias para llevar a cabo nuestro proyecto y desarrollamos funciones que serian consumidas de forma virtual por el servidor del servicio de FastAPI al cual adjuntaremos el enlace para poder visualizar dichas funciones dando clic al archivo [main.py](https://github.com/LuisHV16/Proyecto-MLOps-Engineer-sobre-un-sistema-de-recomendaciones-de-peliculas/blob/main/main.py) este archivo contiene los modelos de consulta al cual son consumidos para poderlos visualizar en el servidos ASGI de FastAPI, este era un punto importante solicitados por la direccion del proyecto, ademas es posible visualizar y ejecutar de forma local las funciones creadas para el modelo de consulta dando clic al archivo [funciones.py](https://github.com/LuisHV16/Proyecto-MLOps-Engineer-sobre-un-sistema-de-recomendaciones-de-peliculas/blob/main/Modelos%20de%20Consulta.ipynb). 
 
 Todo esto fue desarrollado localmente en VSCODE usando Jupyter Notebook, python, numpy, pandas, FastAPI, uvicorn, tableau, json.
 
-## Recommendation System
-The recommendation system was developed in a Jupyter Notebook file. The NLP tool RAKE was used to generate keywords from the overview column. These keywords were combined with the genres_name and title columns into a single string for each film. CountVectorizer was then used to calculate the cosine similarity matrix. Based on the similarity scores provided by the matrix, the algorithm recommends the top 5 most similar movies to the one provided by the user as input. This model was also made available as an endpoint on the API. The completed algorithm the API uses is located in a python file called recomendacion.py in the API repository. The development of the algorithm is on this repository: [Machine Learning Development](https://github.com/ksfajardo/PI01_ML_OPS/blob/main/MLmodel.ipynb) on this repository.
+## Sistema de recomendaciones de películas
+Para nuestro modelo de recomendaciones de peliculas primero creamos un archivo tomando en cuenta unicamente las columnas que serian utilizadas por nuestro modelo, propusimos un modelos de recomendaciones basicas tomando en cuenta las columnas 'title', 'genres', 'popularity', 'vote_average' ya que considere que es el criterio predominante en un usuario standar al momento de seleccionar una pelicula y creamos un modelo de machine learning utilizando NearestNeighbors de 4 vecinos que compartan caracteristicas similares al del titulo solicitado por el usuario. El desarrollo de nuestro modelo pueden encontrarlo en el siguiente archivo: [Machine Learning Development](https://github.com/LuisHV16/Proyecto-MLOps-Engineer-sobre-un-sistema-de-recomendaciones-de-peliculas/blob/main/Modelo%20de%20ML.ipynb) on this repository.
 
-All of this was developed locally in VSCODE using Jupyter Notebook, python, numpy, pandas, rake-nltk and scikit-learn.
+Este modelo fue desarrollado en VSCODE utilizando Jupyter Notebook, python, numpy, pandas y scikit-learn.
 
 ## Deployment
-After having the main.py and the rest of the files with the model and functions complete, the API was deployed using Google Cloud Run, as it offers the flexibility to allocate a desired amount of RAM memory and CPUs to the application. Since Cloud Run is a container hosting service, it was necessary to set up the API environment in a docker file. To do this, a [requierements.txt](https://github.com/ksfajardo/PI01_ML_OPS_API/blob/main/requirements.txt) file was constructed inside of which all the dependencies and libraries necessary to run the endpoints were included. Then, the docker image was created locally and subsequently uploaded to Docker Hub. 
-Next, on Google Cloud, a Cloud Run service was created with the link given by Docker Hub of the docker image. 16GiB of RAM memory and 4 CPUs were assigned to run the API. Whit this, Cloud Run itself deploys the application and generates a link to acces the [running API](https://moviesapp-oxeinkhcia-uc.a.run.app).  
+Luego de implementar nuestros modelos de consulta y de recomendaciones de peliculas utilizando los servicios de FastAPI mediante la creacion de nuestro archivo main.py procedemos a hacer el despliegue del proyecto utilizando los servicios de Render para que pueda ser utilizado de forma remota y virtual, para esto creamos un archivo de nombre [requierements.txt](https://github.com/LuisHV16/Proyecto-MLOps-Engineer-sobre-un-sistema-de-recomendaciones-de-peliculas/blob/main/requirements.txt) ya que este archivo contiene las librerias necesarias para el funcionamiento de todo nuestro entorno virtual y nos otorga la ventaja de que los colaboradores que decidan unirse a este proyecto y hacerlo mas robusto pueden crear un entorno virtual con las librerias indicadas en dicho archivo y poder a partir de los archivos compartidos en nuestro respositorio de github, dicho esto es posible acceder a nuestra API creada y consumida desde Render dando clic al siguiente enlace [running API](https://proyecto-mlops-engineer-sobre-un-sistema.onrender.com/docs).  
 
-PD: It is worth mentioning that even with all of this resources the service was unable to run the recommendation algorithm using the full dataset (the similarity matrix of the full dataset alone weighs almost 15GB). Even though I could have allocated even more resources to the API so that it runs in its full dataset glory, I did not because that would have meant having to search for a server (in all of the possible regions that Google Cloud has, which are A LOT) that could host it, because every region has a different limit of resources allowed per user. So, instead I decided to use a sample of the dataset (half its size to be precise) and deploy the API with it. You can find this part in the last section of the Jupyter Notebook where the recommedation system was developed ([here](https://github.com/ksfajardo/PI01_ML_OPS/blob/main/MLmodel.ipynb)).
+## Desarrollador
 
-## Developer
-<div align="center">
-Only me this time :) 
- 
-| [<img src="https://avatars.githubusercontent.com/u/104804355?s=400&u=7c7592e2239f0ef414c4a3c5a61920ab19c9d980&v=4" width=115><br><sub>Karla Fajardo</sub>](https://github.com/ksfajardo) |
-| :---: | 
+Aqui comparto el enlace a mi perfil de LinkedIn, si acaso algun equipo de proyecto u empresa se sintiera interesado en mi talento y conocer un poco mas acerca de mi: </br>
 
-Here is my Linkedin if you would like to get in contact with me: </br>
-
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/karla-fajardo-3b3020175/)
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luis-arturo-huerto-valentin-1334811a5/)
 
 </div>
 
 ## Video
-If you would like to see the video of me giving an overview of this project, click on the YouTube logo below:
+En el siguiente enlace hago una rapida presentacion y explicacion sobre lo realizado en el proyecto, para que los interesados puedan acceder y conocer un poco más en mis palabras sobre los que se desarrollo en todo el proceso de analisis de este proyecto.
 
 <div align="center">
   
 [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://www.youtube.com/watch?v=B-hJy58UnNY)
   
-</div>
-
-(In the video I talk in spanish)
-
-## Acknowledgment
-
-Here are a few people I would like to thank for their unwavering support throughout the development of this project: </br>
-
-First, to my beloved Full-Stack Developer boyfriend, William, who talked me out of using Render for my API and told me to go for something more challenging: Thank you, you were right. Docker and Google Cloud are indeed the GOAT. </br>
-
-Second, to my favorite artist, Taylor Swift: thank you for meeting me at midnight during every single day I spent developing this porject and keeping me company with your music while everybody else in my house slept. </br>
-
-And last but not least, to the amazing friends I have made at Henry: Here is to helping and lifting each other up whenever we need it! I had the most fun helping you get to the finish line with me.
-
-<div align="center">
-
-![wink](https://github.com/ksfajardo/PI01_ML_OPS/blob/main/taylor.gif)
-
 </div>
