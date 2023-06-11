@@ -42,7 +42,7 @@ def peliculas_mes(mes: str):
     cantidad_peliculas = len(data[data['release_date'].dt.month_name().str.lower() == mes.lower()])
     return {'mes':mes_espanol, 'cantidad':cantidad_peliculas}
 
-@app.get('/cantidad_filmaciones_dia{dia}')
+@app.get('/cantidad_filmaciones_dia/{dia}')
 def peliculas_dia(dia:str):
     archivo='./Datos/sistemaconsulta_func1234.csv'
     columnas=['release_date']
